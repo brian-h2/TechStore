@@ -31,30 +31,55 @@ namespace TechStore
             //Permitimos actulizarlo unicamente cuando se llama el metodo
             //Se realiza encapsulacion
             clsNodo nodo = new clsNodo();
-            if(txtCodigo.Text != "" || txtDescripcion.Text != "" || txtNombre.Text != "" || txtPrecio.Text != "" || txtStock.Text != "")
+            if (!string.IsNullOrWhiteSpace(txtCodigo.Text) && //Si es null devuelve true
+                !string.IsNullOrWhiteSpace(txtDescripcion.Text) &&
+                !string.IsNullOrWhiteSpace(txtNombre.Text) &&
+                !string.IsNullOrWhiteSpace(txtPrecio.Text) &&
+                !string.IsNullOrWhiteSpace(txtStock.Text))
             {
-                nodo.id = Convert.ToInt32(txtCodigo.Text);
-                nodo.nombre = txtNombre.Text;
-                nodo.descripcion = txtDescripcion.Text;
-                nodo.precio = Convert.ToInt32(txtPrecio.Text);
-                nodo.stock = Convert.ToInt32(txtStock.Text);
-                administrarStore.agregarDatos(nodo);
-                administrarStore.recorrerListaAsc(dgvDatos);
-                administrarStore.rellenarCMB(cmbDatos);
-                MessageBox.Show("Datos agregados correctamente");
-                txtCodigo.Text = "";
-                txtDescripcion.Text = "";
-                txtNombre.Text = "";
-                txtPrecio.Text = "";
-                txtStock.Text = "";
-            } else
+                try
+                {
+                    nodo.id = Convert.ToInt32(txtCodigo.Text);
+                    nodo.nombre = txtNombre.Text.Trim();
+                    nodo.descripcion = txtDescripcion.Text.Trim();
+                    
+
+                    if (int.TryParse(txtPrecio.Text, out int precio) && int.TryParse(txtStock.Text, out int stock))
+                    {
+                        nodo.precio = precio;
+                        nodo.stock = stock;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Precio y Stock deben ser números válidos.");
+                        return;
+                    }
+
+                    administrarStore.agregarDatos(nodo);
+                    administrarStore.rellenarCMB(cmbDatos);
+                    MessageBox.Show("Datos agregados correctamente");
+
+                    txtCodigo.Text = "";
+                    txtDescripcion.Text = "";
+                    txtNombre.Text = "";
+                    txtPrecio.Text = "";
+                    txtStock.Text = "";
+                }
+                catch (FormatException ex)
+                {
+                    MessageBox.Show("Error en el formato de los datos: " + ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Se produjo un error: " + ex.Message);
+                }
+            }
+            else
             {
                 MessageBox.Show("Faltan datos de ingresar");
             }
-            
-        }
 
-     
+        }
 
         private void btnListar_Click(object sender, EventArgs e)
         {
@@ -68,20 +93,51 @@ namespace TechStore
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int elemento = Convert.ToInt32(cmbDatos.SelectedItem);
+            if(cmbDatos.SelectedItem != null || cmbDatos.Text.Length < 0)
+            {
+                int elemento = Convert.ToInt32(cmbDatos.SelectedItem);
 
-            administrarStore.eliminarDato(elemento);
-            administrarStore.recorrerLista(dgvDatos);
+                administrarStore.eliminarDato(elemento);
+                administrarStore.recorrerLista(dgvDatos);
+            } else
+            {
+                MessageBox.Show("Selecciona un elemento del combobox");
+                cmbDatos.Text = "";
+            }
+           
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            int cod = Convert.ToInt32(txtCodigoBuscar.Text);
+            
+            if (!string.IsNullOrWhiteSpace(txtCodigoBuscar.Text))
+            {
+                try
+                {
+                    if(int.TryParse(txtCodigoBuscar.Text, out int cod))
+                    {
+                        administrarStore.buscarCodigo(cod);
+                        lblNombre.Text = administrarStore.Nombre;
+                        lblPrecio.Text = administrarStore.Precio.ToString();
+                        lblStock.Text = administrarStore.Stock.ToString();
+                    } else
+                    {
+                        MessageBox.Show("El codigo a buscar debe ser valido");
+                        return;
+                    }
+               
+                }
+                catch (FormatException ex)
+                {
+                    MessageBox.Show("Error en el formato de los datos: " + ex.Message);
+                }
+            } 
+            else 
+            {
+                MessageBox.Show("Ingrese dato a buscar");
+            } 
            
-            administrarStore.buscarCodigo(cod);
-            lblNombre.Text = administrarStore.Nombre;
-            lblPrecio.Text = administrarStore.Precio.ToString();
-            lblStock.Text = administrarStore.Stock.ToString();
+           
         }
 
         private void btnExportar_Click(object sender, EventArgs e)
@@ -90,13 +146,6 @@ namespace TechStore
 
         }
 
-        private void prtDocumento_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
-        {
-            //administrarStore.imprimirDatos(e,dgvDatos);
-        }
-
-        //Aplicar funcionalidad de imprimir lista
-        //Controles a los textBox
         //Grabar video
     }
 }

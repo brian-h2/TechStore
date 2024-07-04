@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Printing;
+using System.IO;
 
 namespace TechStore
 {
@@ -59,28 +60,43 @@ namespace TechStore
 
         public void eliminarDato(Int32 cod)
         {
-            if(primero.id == cod)
+            /* 
+             Recorrer la lista de nodos para ver si existe ese codigo que pasamos,
+             caso contrario devolveriamos un error, pero si existe procedemos al 
+             metodo.
+             */ 
+            clsNodo aux1 = primero;
+
+            if(primero.id == cod && ultimo.id == cod)
             {
-                primero = primero.Siguiente;
-                primero.Anterior = null;
+                primero = null;
+                ultimo = null;
             } else
             {
-                if(ultimo.id == cod)
+                if (primero.id == cod)
                 {
-                    ultimo = ultimo.Anterior;
-                    ultimo.Siguiente = null;
+                    primero = primero.Siguiente;
+                    primero.Anterior = null;
                 }
                 else
                 {
-                    clsNodo aux1 = primero;
-                    while (aux1.Siguiente.id < cod)
+                    if (ultimo.id == cod)
                     {
-                        aux1 = aux1.Siguiente;
+                        ultimo = ultimo.Anterior;
+                        ultimo.Siguiente = null;
                     }
-                    aux1.Siguiente = aux1.Siguiente.Siguiente;
-                    aux1.Siguiente.Anterior = aux1;
+                    else
+                    {
+                        while (aux1.Siguiente.id < cod)
+                        {
+                            aux1 = aux1.Siguiente;
+                        }
+                        aux1.Siguiente = aux1.Siguiente.Siguiente;
+                        aux1.Siguiente.Anterior = aux1;
+                    }
                 }
             }
+            MessageBox.Show("Dato Eliminado Correctamente");
         } 
 
         public void recorrerLista(DataGridView datos)
@@ -93,13 +109,8 @@ namespace TechStore
                 aux1 = aux1.Siguiente;
             }
 
-            //Sobrecarga de tres metodos (Basicamente seria color un switch con cada metodo
-            //y desde el form al darle click llamaria a ese metodo dentro del switch
-        }
-
-        public void recorrerListaAsc(DataGridView datos)
-        {
-            recorrerLista(datos);
+            //Sobrecarga de tres metodos (Basicamente seria colocar un switch con cada metodo
+            //y desde el form al darle click llamaria a ese metodo dentro del switch)
         }
 
         public void recorrerListaDesc(DataGridView datos)
@@ -151,15 +162,25 @@ namespace TechStore
 
         public void imprimirDatos(DataGridView datos)
         {
-          foreach(DataGridViewRow row in datos.Rows)
+            using (StreamWriter writer = new StreamWriter("Reporte-de-Productos.csv", false, Encoding.UTF8))
             {
-                foreach (DataGridViewCell column in row.Cells)
-                {
-                    
-                }
-            }
+         
+                writer.WriteLine("Listado de productos");
+                writer.WriteLine("Nombre;Precio;Stock");
 
-            
+                foreach (DataGridViewRow row in datos.Rows)
+                {
+                    if (row.IsNewRow) continue;
+
+                    var nombre = row.Cells[0].Value?.ToString();
+                    var precio = row.Cells[3].Value?.ToString();
+                    var stock = row.Cells[4].Value?.ToString();
+
+                    writer.WriteLine($"{nombre};{precio};{stock}");
+                }
+
+                MessageBox.Show("Datos exportados correctamente");
+            }
         }
     }
 }

@@ -62,8 +62,6 @@
             this.txtPrecio = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.btnListarDesc = new System.Windows.Forms.Button();
-            this.prtImprimirVentana = new System.Windows.Forms.PrintDialog();
-            this.prtDocumento = new System.Drawing.Printing.PrintDocument();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -72,7 +70,7 @@
             // 
             // btnAgregar
             // 
-            this.btnAgregar.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnAgregar.BackColor = System.Drawing.Color.Silver;
             this.btnAgregar.Location = new System.Drawing.Point(309, 87);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(100, 53);
@@ -83,7 +81,7 @@
             // 
             // button2
             // 
-            this.button2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.button2.BackColor = System.Drawing.Color.Silver;
             this.button2.Location = new System.Drawing.Point(260, 44);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(100, 53);
@@ -95,7 +93,7 @@
             // btnListar
             // 
             this.btnListar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnListar.Location = new System.Drawing.Point(44, 518);
+            this.btnListar.Location = new System.Drawing.Point(45, 535);
             this.btnListar.Name = "btnListar";
             this.btnListar.Size = new System.Drawing.Size(100, 53);
             this.btnListar.TabIndex = 2;
@@ -105,7 +103,7 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnBuscar.BackColor = System.Drawing.Color.Silver;
             this.btnBuscar.Location = new System.Drawing.Point(309, 17);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(100, 53);
@@ -117,7 +115,7 @@
             // btnExportar
             // 
             this.btnExportar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportar.Location = new System.Drawing.Point(495, 521);
+            this.btnExportar.Location = new System.Drawing.Point(496, 538);
             this.btnExportar.Name = "btnExportar";
             this.btnExportar.Size = new System.Drawing.Size(100, 53);
             this.btnExportar.TabIndex = 4;
@@ -131,6 +129,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtDescripcion.Location = new System.Drawing.Point(148, 103);
+            this.txtDescripcion.MaxLength = 32;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(100, 26);
             this.txtDescripcion.TabIndex = 5;
@@ -181,6 +180,7 @@
             // 
             // dgvDatos
             // 
+            this.dgvDatos.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDatos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -188,7 +188,7 @@
             this.Column3,
             this.Column4,
             this.Column5});
-            this.dgvDatos.Location = new System.Drawing.Point(43, 112);
+            this.dgvDatos.Location = new System.Drawing.Point(44, 129);
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.Size = new System.Drawing.Size(552, 376);
             this.dgvDatos.TabIndex = 14;
@@ -220,7 +220,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.groupBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.groupBox1.Controls.Add(this.lblPrecio);
             this.groupBox1.Controls.Add(this.lblStock);
             this.groupBox1.Controls.Add(this.label6);
@@ -282,11 +282,11 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.groupBox2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.groupBox2.Controls.Add(this.cmbDatos);
             this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(800, 274);
+            this.groupBox2.Location = new System.Drawing.Point(800, 269);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(450, 136);
             this.groupBox2.TabIndex = 16;
@@ -295,7 +295,7 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.groupBox3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.groupBox3.Controls.Add(this.label12);
             this.groupBox3.Controls.Add(this.label11);
             this.groupBox3.Controls.Add(this.label10);
@@ -370,10 +370,11 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label7.Location = new System.Drawing.Point(36, 28);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(177, 39);
+            this.label7.Size = new System.Drawing.Size(246, 55);
             this.label7.TabIndex = 17;
             this.label7.Text = "TechStore";
             this.label7.Click += new System.EventHandler(this.label7_Click);
@@ -381,7 +382,7 @@
             // btnListarDesc
             // 
             this.btnListarDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnListarDesc.Location = new System.Drawing.Point(150, 518);
+            this.btnListarDesc.Location = new System.Drawing.Point(151, 535);
             this.btnListarDesc.Name = "btnListarDesc";
             this.btnListarDesc.Size = new System.Drawing.Size(100, 53);
             this.btnListarDesc.TabIndex = 18;
@@ -389,19 +390,12 @@
             this.btnListarDesc.UseVisualStyleBackColor = true;
             this.btnListarDesc.Click += new System.EventHandler(this.btnListarDesc_Click);
             // 
-            // prtImprimirVentana
-            // 
-            this.prtImprimirVentana.UseEXDialog = true;
-            // 
-            // prtDocumento
-            // 
-            this.prtDocumento.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.prtDocumento_PrintPage);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1334, 643);
+            this.BackColor = System.Drawing.Color.Teal;
+            this.ClientSize = new System.Drawing.Size(1334, 655);
             this.Controls.Add(this.btnListarDesc);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.groupBox3);
@@ -411,7 +405,7 @@
             this.Controls.Add(this.btnExportar);
             this.Controls.Add(this.btnListar);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "TechStore";
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -459,8 +453,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.Button btnListarDesc;
-        private System.Windows.Forms.PrintDialog prtImprimirVentana;
-        private System.Drawing.Printing.PrintDocument prtDocumento;
     }
 }
 
