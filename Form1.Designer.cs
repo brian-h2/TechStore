@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.btnAgregar = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.btnListar = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnExportar = new System.Windows.Forms.Button();
@@ -62,6 +61,8 @@
             this.txtPrecio = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.btnListarDesc = new System.Windows.Forms.Button();
+            this.btnEliminar = new System.Windows.Forms.Button();
+            this.btnListarCMB = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -79,17 +80,6 @@
             this.btnAgregar.UseVisualStyleBackColor = false;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.Silver;
-            this.button2.Location = new System.Drawing.Point(260, 44);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 53);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Eliminar";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // btnListar
             // 
             this.btnListar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -97,7 +87,7 @@
             this.btnListar.Name = "btnListar";
             this.btnListar.Size = new System.Drawing.Size(100, 53);
             this.btnListar.TabIndex = 2;
-            this.btnListar.Text = "Listar";
+            this.btnListar.Text = "Listar Asc";
             this.btnListar.UseVisualStyleBackColor = true;
             this.btnListar.Click += new System.EventHandler(this.btnListar_Click);
             // 
@@ -158,7 +148,7 @@
             // cmbDatos
             // 
             this.cmbDatos.FormattingEnabled = true;
-            this.cmbDatos.Location = new System.Drawing.Point(84, 57);
+            this.cmbDatos.Location = new System.Drawing.Point(84, 60);
             this.cmbDatos.Name = "cmbDatos";
             this.cmbDatos.Size = new System.Drawing.Size(121, 28);
             this.cmbDatos.TabIndex = 9;
@@ -283,8 +273,9 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.groupBox2.Controls.Add(this.btnListarCMB);
+            this.groupBox2.Controls.Add(this.btnEliminar);
             this.groupBox2.Controls.Add(this.cmbDatos);
-            this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(800, 269);
             this.groupBox2.Name = "groupBox2";
@@ -382,13 +373,35 @@
             // btnListarDesc
             // 
             this.btnListarDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnListarDesc.Location = new System.Drawing.Point(151, 535);
+            this.btnListarDesc.Location = new System.Drawing.Point(162, 535);
             this.btnListarDesc.Name = "btnListarDesc";
             this.btnListarDesc.Size = new System.Drawing.Size(100, 53);
             this.btnListarDesc.TabIndex = 18;
             this.btnListarDesc.Text = "Listar Desc";
             this.btnListarDesc.UseVisualStyleBackColor = true;
             this.btnListarDesc.Click += new System.EventHandler(this.btnListarDesc_Click);
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.BackColor = System.Drawing.Color.Silver;
+            this.btnEliminar.Location = new System.Drawing.Point(325, 44);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(84, 58);
+            this.btnEliminar.TabIndex = 10;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = false;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
+            // btnListarCMB
+            // 
+            this.btnListarCMB.BackColor = System.Drawing.Color.Silver;
+            this.btnListarCMB.Location = new System.Drawing.Point(237, 44);
+            this.btnListarCMB.Name = "btnListarCMB";
+            this.btnListarCMB.Size = new System.Drawing.Size(84, 58);
+            this.btnListarCMB.TabIndex = 19;
+            this.btnListarCMB.Text = "Listar";
+            this.btnListarCMB.UseVisualStyleBackColor = false;
+            this.btnListarCMB.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // Form1
             // 
@@ -420,7 +433,6 @@
         #endregion
 
         private System.Windows.Forms.Button btnAgregar;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnListar;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Button btnExportar;
@@ -453,6 +465,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.Button btnListarDesc;
+        private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.Button btnListarCMB;
     }
 }
 

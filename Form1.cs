@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -56,7 +57,6 @@ namespace TechStore
                     }
 
                     administrarStore.agregarDatos(nodo);
-                    administrarStore.rellenarCMB(cmbDatos);
                     MessageBox.Show("Datos agregados correctamente");
 
                     txtCodigo.Text = "";
@@ -83,28 +83,12 @@ namespace TechStore
 
         private void btnListar_Click(object sender, EventArgs e)
         {
-            administrarStore.recorrerLista(dgvDatos);
+            administrarStore.mostrarProductos(dgvDatos);
         }
 
         private void btnListarDesc_Click(object sender, EventArgs e)
         {
-            administrarStore.recorrerListaDesc(dgvDatos);
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            if(cmbDatos.SelectedItem != null || cmbDatos.Text.Length < 0)
-            {
-                int elemento = Convert.ToInt32(cmbDatos.SelectedItem);
-
-                administrarStore.eliminarDato(elemento);
-                administrarStore.recorrerLista(dgvDatos);
-            } else
-            {
-                MessageBox.Show("Selecciona un elemento del combobox");
-                cmbDatos.Text = "";
-            }
-           
+            administrarStore.mostrarProductosDesc(dgvDatos);
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -142,10 +126,40 @@ namespace TechStore
 
         private void btnExportar_Click(object sender, EventArgs e)
         {
-            administrarStore.imprimirDatos(dgvDatos);
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "CSV Files (*.csv)|*.csv";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                administrarStore.mostrarProductos(saveFileDialog.FileName);
+                MessageBox.Show("Datos exportados con éxito");
+            }
 
         }
 
-        //Grabar video
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            administrarStore.mostrarProductos(cmbDatos);
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (cmbDatos.SelectedItem != null || cmbDatos.Text.Length < 0)
+            {
+                int elemento = Convert.ToInt32(cmbDatos.SelectedItem);
+
+                administrarStore.eliminarDato(elemento);
+                administrarStore.mostrarProductos(dgvDatos);
+                cmbDatos.Text = "";
+
+            }
+            else
+            {
+                MessageBox.Show("Selecciona un elemento del combobox");
+                cmbDatos.Text = "";
+
+            }
+
+        }
+
     }
 }
